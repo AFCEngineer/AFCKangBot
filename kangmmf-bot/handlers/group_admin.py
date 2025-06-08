@@ -50,46 +50,46 @@ async def unban_user(client, message: Message):
         await message.reply(f"Error: {e}")
 
 
-async def mute_user(client, message: Message):
-    if not await is_admin(client, message):
-        return await message.reply("You need to be an admin to use this.")
-    if not message.reply_to_message:
-        return await message.reply("Reply to a user to mute.")
+# --- COMMENTED OUT MUTE/UNMUTE FUNCTIONS ---
+# async def mute_user(client, message: Message):
+#     if not await is_admin(client, message):
+#         return await message.reply("You need to be an admin to use this.")
+#     if not message.reply_to_message:
+#         return await message.reply("Reply to a user to mute.")
+#
+#     try:
+#         await client.restrict_chat_member(
+#             message.chat.id,
+#             message.reply_to_message.from_user.id,
+#             permissions=ChatPermissions(),
+#             until_date=timedelta(hours=1)  # mute for 1 hour
+#         await message.reply("User muted for 1 hour.")
+#     except Exception as e:
+#         await message.reply(f"Error: {e}")
+#
+#
+# async def unmute_user(client, message: Message):
+#     if not await is_admin(client, message):
+#         return await message.reply("You need to be an admin to use this.")
+#     if not message.reply_to_message:
+#         return await message.reply("Reply to a user to unmute.")
+#
+#     try:
+#         await client.restrict_chat_member(
+#             message.chat.id,
+#             message.reply_to_message.from_user.id,
+#             permissions=ChatPermissions(can_send_messages=True)
+#         )
+#         await message.reply("User unmuted.")
+#     except Exception as e:
+#         await message.reply(f"Error: {e}")
 
-    try:
-        await client.restrict_chat_member(
-            message.chat.id,
-            message.reply_to_message.from_user.id,
-            permissions=ChatPermissions(),
-            until_date=timedelta(hours=1)  # mute for 1 hour
-        )
-        await message.reply("User muted for 1 hour.")
-    except Exception as e:
-        await message.reply(f"Error: {e}")
 
-
-async def unmute_user(client, message: Message):
-    if not await is_admin(client, message):
-        return await message.reply("You need to be an admin to use this.")
-    if not message.reply_to_message:
-        return await message.reply("Reply to a user to unmute.")
-
-    try:
-        await client.restrict_chat_member(
-            message.chat.id,
-            message.reply_to_message.from_user.id,
-            permissions=ChatPermissions(can_send_messages=True)
-        )
-        await message.reply("User unmuted.")
-    except Exception as e:
-        await message.reply(f"Error: {e}")
-
-
-# Handler list
+# Handler list (commented out mute/unmute handlers)
 group_admin_handlers = [
     MessageHandler(kick_user, filters.command("kick") & filters.group),
     MessageHandler(ban_user, filters.command("ban") & filters.group),
     MessageHandler(unban_user, filters.command("unban") & filters.group),
-    MessageHandler(mute_user, filters.command("mute") & filters.group),
-    MessageHandler(unmute_user, filters.command("unmute") & filters.group),
+  #  MessageHandler(mute_user, filters.command("mute") & filters.group),
+  #  MessageHandler(unmute_user, filters.command("unmute") & filters.group),
 ]
